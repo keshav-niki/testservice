@@ -1,0 +1,46 @@
+apiVersion: v1
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: first
+  name: first
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: first
+  template:                                                            
+    metadata:                                                          
+      annotations:                                                     
+      labels:                                                          
+        app: first
+    spec:
+      containers:
+        image: asia.gcr.io/niki-ai/first:latest
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: first
+  name: first
+  namespace: app
+  ports:
+  - name: first
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: first
+  sessionAffinity: None
+  type: ClusterIP
