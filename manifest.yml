@@ -12,18 +12,17 @@ spec:
   selector:
     matchLabels:
       app: first
-  template:                                                            
-    metadata:                                                          
-      annotations:                                                     
-      labels:                                                          
+  template:
+    metadata:
+      annotations:
+      labels:
         app: first
     spec:
       containers:
+      - name: first
         image: asia.gcr.io/niki-ai/first:latest
         ports:
         - containerPort: 8080
-          name: http
-          protocol: TCP
 
 ---
 
@@ -35,6 +34,7 @@ metadata:
     app: first
   name: first
   namespace: app
+spec:
   ports:
   - name: first
     port: 80
